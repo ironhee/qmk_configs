@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-#define DEBOUNCE 5
 #define HAL_USE_SIO TRUE
 
 #define USE_SERIAL
@@ -33,19 +32,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 200U
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_LED_MASK 0U
-
-#define MATRIX_ROWS 8
-#define MATRIX_COLS 5
-#define MATRIX_COL_PINS     \
-  {                         \
-    GP2, GP3, GP4, GP5, GP6 \
-  }
-#define MATRIX_ROW_PINS   \
-  {                       \
-    GP9, GP10, GP11, GP12 \
-  }
-
-#define DIODE_DIRECTION COL2ROW
 
 #define LOCKING_SUPPORT_ENABLE
 #define LOCKING_RESYNC_ENABLE

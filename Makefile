@@ -24,7 +24,8 @@ $(KEYBOARDS):
 	[ -d $(shell pwd)/configs/$@ ] \
 		&& mkdir qmk_firmware/keyboards/$(USER) \
 		&& ln -s $(shell pwd)/configs/$@ qmk_firmware/keyboards/$(USER)/$@ \
-		&& mkdir -p qmk_firmware/keyboards/$(USER)/$@/keymaps
+		&& mkdir -p qmk_firmware/keyboards/$(USER)/$@/keymaps \
+		|| echo ''
 	ln -s $(shell pwd)/keymaps/$@ qmk_firmware/keyboards/$(NAME_$@)/keymaps/$(USER)
 	ln -s $(shell pwd)/user qmk_firmware/users/$(USER)
 

@@ -1,6 +1,3 @@
 [submodule "qmk_firmware"]
 	path = qmk_firmware
 	url = https://github.com/qmk/qmk_firmware.git
-[submodule "zmk-config-totem"]
-	path = zmk-config-totem
-	url = https://github.com/ironhee/zmk-config-totem.git

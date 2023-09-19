@@ -43,10 +43,11 @@ enum keycodes
 #define TAB_CLS C(KC_W)           // Close Tab
 #define TAB_RST C(S(KC_T))        // Restore Tab
 #define WN_PREV C(G(KC_LEFT))     // Window Space Prev
-#define WN_NEXT C(G(KC_RGHT))     // Window Space Nexts
-#define WN_SHOW G(KC_TAB)         // Window Space Nexts
+#define WN_NEXT C(G(KC_RGHT))     // Window Space Next
+#define WN_SHOW G(KC_TAB)         // Window Space Next
 #define WD_PREV C(KC_LEFT)        // Word Prev
-#define WD_NEXT C(KC_RGHT)        // Word Nextsk
+#define WD_NEXT C(KC_RGHT)        // Word Next
+#define TB_NEXT A(KC_TAB)         // Next Tab
 
 /**
  * Key Overrides
@@ -138,17 +139,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [NAVI] = LAYOUT_split_3x5_3(
-        KC_BTN4, WN_PREV, WN_SHOW, WN_NEXT, KC_BTN5, KC_PGUP, WD_PREV, KC_UP,   WD_NEXT, KC_VOLU,
-        KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, _______, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_VOLD,
-        PPY_SCR, KC_BTN3, KC_BTN2, KC_BTN1, PPY_DPI, _______, KC_HOME, _______, KC_END,  KC_MUTE,
+        KC_BTN4, WN_PREV, WN_SHOW, WN_NEXT, KC_BTN5, _______, WD_PREV, KC_UP,   WD_NEXT, _______,
+        KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, TB_NEXT, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,
+        PPY_SCR, KC_BTN3, KC_BTN2, KC_BTN1, PPY_DPI, _______, KC_PGUP, _______, KC_PGDN, _______,
                           _______, _______, QK_BOOT, _______, _______, _______
     ),
 
     [NUMB] = LAYOUT_split_3x5_3(
         _______, KC_7,    KC_8,    KC_9,    _______, _______, _______, _______, _______, _______,
         _______, KC_4,    KC_5,    KC_6,    _______, _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-        _______, KC_1,    KC_2,    KC_3,    _______, _______, _______, _______, _______, _______,
-                          _______, KC_0,    _______, QK_BOOT, _______, _______
+        KC_0,    KC_1,    KC_2,    KC_3,    _______, _______, _______, _______, _______, _______,
+                          _______, _______, _______, QK_BOOT, _______, _______
     ),
 
     [FUNC] = LAYOUT_split_3x5_3(
@@ -176,6 +177,7 @@ bool get_permissive_hold(uint16_t keycode, keyrecord_t *record)
     case RHOME_2:
     case RHOME_3:
     case RHOME_4:
+    case LTHUM_2:
         return true;
     default:
         return false;
@@ -191,7 +193,6 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
     switch (keycode)
     {
     case LTHUM_1:
-    case LTHUM_2:
     case LTHUM_3:
     case RHOME_1:
     case RTHUM_2:

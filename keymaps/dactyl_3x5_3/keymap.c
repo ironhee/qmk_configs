@@ -1,4 +1,5 @@
 #include QMK_KEYBOARD_H
+#include "features/achordion.h"
 
 /**
  * Layer
@@ -21,6 +22,7 @@ enum keycodes
     PPY_SCR, // Ploopy nano scroll wheel
     PPY_DPI, // Ploopy nano change DPI
     PPY_RST, // Ploopy nano RESET
+    SL_LINE, // Select Line
 };
 
 /**
@@ -48,6 +50,10 @@ enum keycodes
 #define WD_PREV C(KC_LEFT)        // Word Prev
 #define WD_NEXT C(KC_RGHT)        // Word Next
 #define TB_NEXT A(KC_TAB)         // Next Tab
+#define SL_HOME S(KC_HOME)        // Select Home
+#define SL_LEFT S(KC_LEFT)        // Select Left
+#define SL_RGHT S(KC_RGHT)        // Select Right
+#define SL_END S(KC_END)          // Select End
 
 /**
  * Key Overrides
@@ -94,7 +100,7 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 const uint16_t PROGMEM mins_slsh_combo[] = {KC_W, KC_E, COMBO_END};      // w + e = -/
 const uint16_t PROGMEM plus_astr_combo[] = {KC_E, KC_R, COMBO_END};      // e + r = +*
 const uint16_t PROGMEM eql_unds_combo[] = {KC_W, KC_R, COMBO_END};       // w + r = =_
-const uint16_t PROGMEM del_combo[] = {LHOME_2, LHOME_3, COMBO_END};      // s + d = DEL
+const uint16_t PROGMEM tab_combo[] = {LHOME_2, LHOME_3, COMBO_END};      // s + d = TAB
 const uint16_t PROGMEM bspc_combo[] = {LHOME_3, LHOME_4, COMBO_END};     // d + f = BACKSPACE
 const uint16_t PROGMEM esc_combo[] = {LHOME_2, LHOME_4, COMBO_END};      // s + f = ESC
 const uint16_t PROGMEM bsls_hash_combo[] = {KC_X, KC_C, COMBO_END};      // x + c = \#
@@ -103,6 +109,9 @@ const uint16_t PROGMEM grv_circ_combo[] = {KC_X, KC_V, COMBO_END};       // x + 
 const uint16_t PROGMEM lprn_labk_combo[] = {KC_U, KC_I, COMBO_END};      // u + i = (<
 const uint16_t PROGMEM rprn_rabk_combo[] = {KC_I, KC_O, COMBO_END};      // i + o = )>
 const uint16_t PROGMEM pipe_ampr_combo[] = {KC_U, KC_O, COMBO_END};      // u + o = |&
+const uint16_t PROGMEM lang_combo[] = {RHOME_4, RHOME_3, COMBO_END};     // j + k = 한/영
+const uint16_t PROGMEM caps_combo[] = {RHOME_3, RHOME_2, COMBO_END};     // k + l = CAPSLOCK
+const uint16_t PROGMEM mute_combo[] = {RHOME_4, RHOME_2, COMBO_END};     // j + l = MUTE
 const uint16_t PROGMEM lbrc_lcbr_combo[] = {KC_M, KC_COMM, COMBO_END};   // m + , = [{
 const uint16_t PROGMEM rbrc_rcbr_combo[] = {KC_COMM, KC_DOT, COMBO_END}; // , + . = ]}
 const uint16_t PROGMEM tild_dlr_combo[] = {KC_M, KC_DOT, COMBO_END};     // m + . = ~$
@@ -111,15 +120,18 @@ combo_t key_combos[] = {
     COMBO(mins_slsh_combo, KC_MINS),
     COMBO(plus_astr_combo, KC_PLUS),
     COMBO(eql_unds_combo, KC_EQL),
-    COMBO(del_combo, LSA_T(KC_DEL)),
-    COMBO(bspc_combo, C_S_T(KC_BSPC)),
-    COMBO(esc_combo, LCA_T(KC_ESC)),
+    COMBO(tab_combo, KC_TAB),
+    COMBO(bspc_combo, KC_BSPC),
+    COMBO(esc_combo, KC_ESC),
     COMBO(bsls_hash_combo, KC_BSLS),
     COMBO(at_perc_combo, KC_AT),
     COMBO(grv_circ_combo, KC_GRV),
     COMBO(lprn_labk_combo, KC_LPRN),
     COMBO(rprn_rabk_combo, KC_RPRN),
     COMBO(pipe_ampr_combo, KC_PIPE),
+    COMBO(lang_combo, KC_LNG1),
+    COMBO(caps_combo, KC_CAPS),
+    COMBO(mute_combo, KC_MUTE),
     COMBO(lbrc_lcbr_combo, KC_LBRC),
     COMBO(rbrc_rcbr_combo, KC_RBRC),
     COMBO(tild_dlr_combo, KC_TILD),
@@ -139,9 +151,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [NAVI] = LAYOUT_split_3x5_3(
-        KC_BTN4, WN_PREV, WN_SHOW, WN_NEXT, KC_BTN5, _______, WD_PREV, KC_UP,   WD_NEXT, _______,
+        KC_BTN4, WN_PREV, WN_SHOW, WN_NEXT, KC_BTN5, KC_PGUP, WD_PREV, KC_UP,   WD_NEXT, KC_PGDN,
         KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, TB_NEXT, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,
-        PPY_SCR, KC_BTN3, KC_BTN2, KC_BTN1, PPY_DPI, _______, KC_PGUP, _______, KC_PGDN, _______,
+        PPY_SCR, KC_BTN3, KC_BTN2, KC_BTN1, PPY_DPI, SL_HOME, SL_LEFT, SL_LINE, SL_RGHT, SL_END,
                           _______, _______, QK_BOOT, _______, _______, _______
     ),
 
@@ -194,7 +206,7 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
     {
     case LTHUM_1:
     case LTHUM_3:
-    case RHOME_1:
+    case RTHUM_1:
     case RTHUM_2:
     case RTHUM_3:
         return true;
@@ -209,20 +221,95 @@ bool get_hold_on_other_key_press(uint16_t keycode, keyrecord_t *record)
  */
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
+    /**
+     * Achordion
+     * https://getreuer.info/posts/keyboards/achordion/index.html
+     */
+    if (!process_achordion(keycode, record))
+    {
+        return false;
+    }
+
+    /**
+     * Macros
+     * https://github.com/qmk/qmk_firmware/blob/master/docs/feature_macros.md
+     */
     switch (keycode)
     {
     case PPY_SCR:
         if (record->event.pressed)
+        {
             SEND_STRING(SS_TAP(X_NUM) SS_TAP(X_NUM));
+        }
         break;
     case PPY_DPI:
         if (record->event.pressed)
+        {
             SEND_STRING(SS_TAP(X_SCRL) SS_TAP(X_SCRL));
+        }
         break;
     case PPY_RST:
         if (record->event.pressed)
+        {
             SEND_STRING(SS_TAP(X_NUM) SS_TAP(X_NUM) SS_TAP(X_SCRL) SS_TAP(X_SCRL));
+        }
+        break;
+    case SL_LINE:
+        if (record->event.pressed)
+        {
+            SEND_STRING(SS_TAP(X_HOME) SS_DOWN(X_LSFT) SS_TAP(X_END) SS_UP(X_LSFT));
+        }
         break;
     }
+
+    return true;
+}
+
+/**
+ * Achordion
+ * https://getreuer.info/posts/keyboards/achordion/index.html
+ */
+void matrix_scan_user(void)
+{
+    achordion_task();
+}
+
+/**
+ * Achordion
+ * https://getreuer.info/posts/keyboards/achordion/index.html
+ */
+bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, uint16_t other_keycode, keyrecord_t *other_record)
+{
+    switch (tap_hold_keycode)
+    {
+    case LTHUM_1:
+    case LTHUM_2:
+    case LTHUM_3:
+    case RTHUM_1:
+    case RTHUM_2:
+    case RTHUM_3:
+        return true;
+    }
+
+    switch (other_keycode)
+    {
+    case LTHUM_1:
+    case LTHUM_2:
+    case LTHUM_3:
+    case RTHUM_1:
+    case RTHUM_2:
+    case RTHUM_3:
+        return true;
+    }
+
+    return achordion_opposite_hands(tap_hold_record, other_record);
+}
+
+/**
+ * Tap-only combos are useful if any (or all) of the underlying keys are mod-tap or layer-tap keys.
+ * https://github.com/qmk/qmk_firmware/blob/master/docs/feature_combo.md#per-combo-timing-holding-tapping-and-key-press-order
+ */
+bool get_combo_must_tap(uint16_t index, combo_t *combo)
+{
     return true;
 }

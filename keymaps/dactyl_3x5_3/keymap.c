@@ -280,6 +280,7 @@ void matrix_scan_user(void)
  */
 bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, uint16_t other_keycode, keyrecord_t *other_record)
 {
+    // Thumb keys exception
     switch (tap_hold_keycode)
     {
     case LTHUM_1:
@@ -300,6 +301,45 @@ bool achordion_chord(uint16_t tap_hold_keycode, keyrecord_t *tap_hold_record, ui
     case RTHUM_2:
     case RTHUM_3:
         return true;
+    }
+
+    // Combo keys mapping
+    switch (tap_hold_keycode)
+    {
+    case LHOME_1:
+    case LHOME_2:
+    case LHOME_3:
+    case LHOME_4:
+        switch (other_keycode)
+        {
+        case KC_LPRN:
+        case KC_RPRN:
+        case KC_PIPE:
+        case KC_LNG1:
+        case KC_CAPS:
+        case KC_MUTE:
+        case KC_LBRC:
+        case KC_RBRC:
+        case KC_TILD:
+            return true;
+        }
+    case RHOME_1:
+    case RHOME_2:
+    case RHOME_3:
+    case RHOME_4:
+        switch (other_keycode)
+        {
+        case KC_MINS:
+        case KC_PLUS:
+        case KC_EQL:
+        case KC_TAB:
+        case KC_BSPC:
+        case KC_ESC:
+        case KC_BSLS:
+        case KC_AT:
+        case KC_GRV:
+            return true;
+        }
     }
 
     return achordion_opposite_hands(tap_hold_record, other_record);

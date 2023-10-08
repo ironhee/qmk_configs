@@ -28,32 +28,26 @@ enum keycodes
 /**
  * Alias
  */
-#define LTHUM_1 CTL_T(KC_ENT)     // Left Thumb 1
-#define LTHUM_2 LT(NAVI, KC_SPC)  // Left Thumb 2
-#define LTHUM_3 KC_TAB            // Left Thumb 3
-#define RTHUM_3 LT(FUNC, KC_LNG1) // Right Thumb 3
-#define RTHUM_2 LSFT_T(KC_BSPC)   // Right Thumb 2
-#define RTHUM_1 LT(NUMB, KC_DEL)  // Right Thumb 1
-#define LHOME_1 LGUI_T(KC_A)      // Left Home Row 1
-#define LHOME_2 LALT_T(KC_S)      // Left Home Row 2
-#define LHOME_3 LCTL_T(KC_D)      // Left Home Row 3
-#define LHOME_4 LSFT_T(KC_F)      // Left Home Row 4
-#define RHOME_4 LSFT_T(KC_J)      // Right Home Row 4
-#define RHOME_3 LCTL_T(KC_K)      // Right Home Row 3
-#define RHOME_2 LALT_T(KC_L)      // Right Home Row 2
-#define RHOME_1 LGUI_T(KC_QUOT)   // Right Home Row 1
-#define TAB_CLS C(KC_W)           // Close Tab
-#define TAB_RST C(S(KC_T))        // Restore Tab
-#define WN_PREV C(G(KC_LEFT))     // Window Space Prev
-#define WN_NEXT C(G(KC_RGHT))     // Window Space Next
-#define WN_SHOW G(KC_TAB)         // Window Space Next
-#define WD_PREV C(KC_LEFT)        // Word Prev
-#define WD_NEXT C(KC_RGHT)        // Word Next
-#define TB_NEXT A(KC_TAB)         // Next Tab
-#define SL_HOME S(KC_HOME)        // Select Home
-#define SL_LEFT S(KC_LEFT)        // Select Left
-#define SL_RGHT S(KC_RGHT)        // Select Right
-#define SL_END S(KC_END)          // Select End
+#define LTHUM_1 CTL_T(KC_ENT)      // Left Thumb 1
+#define LTHUM_2 LT(NAVI, KC_SPC)   // Left Thumb 2
+#define LTHUM_3 KC_TAB             // Left Thumb 3
+#define RTHUM_3 LT(FUNC, KC_LN G1) // Right Thumb 3
+#define RTHUM_2 LSFT_T(KC_BSPC)    // Right Thumb 2
+#define RTHUM_1 LT(NUMB, KC_DEL)   // Right Thumb 1
+#define LHOME_1 LGUI_T(KC_A)       // Left Home Row 1
+#define LHOME_2 LALT_T(KC_S)       // Left Home Row 2
+#define LHOME_3 LCTL_T(KC_D)       // Left Home Row 3
+#define LHOME_4 LSFT_T(KC_F)       // Left Home Row 4
+#define RHOME_4 LSFT_T(KC_J)       // Right Home Row 4
+#define RHOME_3 LCTL_T(KC_K)       // Right Home Row 3
+#define RHOME_2 LALT_T(KC_L)       // Right Home Row 2
+#define RHOME_1 LGUI_T(KC_QUOT)    // Right Home Row 1
+#define WN_PREV C(G(KC_LEFT))      // Window Space Prev
+#define WN_NEXT C(G(KC_RGHT))      // Window Space Next
+#define WN_SHOW G(KC_TAB)          // Window Space Next
+#define WD_PREV C(KC_LEFT)         // Word Prev
+#define WD_NEXT C(KC_RGHT)         // Word Next
+#define TB_NEXT A(KC_TAB)          // Next Tab
 
 /**
  * Key Overrides
@@ -111,7 +105,7 @@ const uint16_t PROGMEM rprn_rabk_combo[] = {KC_I, KC_O, COMBO_END};      // i + 
 const uint16_t PROGMEM pipe_ampr_combo[] = {KC_U, KC_O, COMBO_END};      // u + o = |&
 const uint16_t PROGMEM lang_combo[] = {RHOME_4, RHOME_3, COMBO_END};     // j + k = 한/영
 const uint16_t PROGMEM caps_combo[] = {RHOME_3, RHOME_2, COMBO_END};     // k + l = CAPSLOCK
-const uint16_t PROGMEM mute_combo[] = {RHOME_4, RHOME_2, COMBO_END};     // j + l = MUTE
+const uint16_t PROGMEM ppydpi_combo[] = {RHOME_4, RHOME_2, COMBO_END};   // j + l = Ploopy DPI
 const uint16_t PROGMEM lbrc_lcbr_combo[] = {KC_M, KC_COMM, COMBO_END};   // m + , = [{
 const uint16_t PROGMEM rbrc_rcbr_combo[] = {KC_COMM, KC_DOT, COMBO_END}; // , + . = ]}
 const uint16_t PROGMEM tild_dlr_combo[] = {KC_M, KC_DOT, COMBO_END};     // m + . = ~$
@@ -131,7 +125,7 @@ combo_t key_combos[] = {
     COMBO(pipe_ampr_combo, KC_PIPE),
     COMBO(lang_combo, KC_LNG1),
     COMBO(caps_combo, KC_CAPS),
-    COMBO(mute_combo, KC_MUTE),
+    COMBO(ppydpi_combo, PPY_DPI),
     COMBO(lbrc_lcbr_combo, KC_LBRC),
     COMBO(rbrc_rcbr_combo, KC_RBRC),
     COMBO(tild_dlr_combo, KC_TILD),
@@ -153,7 +147,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [NAVI] = LAYOUT_split_3x5_3(
         KC_BTN4, WN_PREV, WN_SHOW, WN_NEXT, KC_BTN5, KC_PGUP, WD_PREV, KC_UP,   WD_NEXT, KC_PGDN,
         KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, TB_NEXT, KC_HOME, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,
-        PPY_SCR, KC_BTN3, KC_BTN2, KC_BTN1, PPY_DPI, SL_HOME, SL_LEFT, SL_LINE, SL_RGHT, SL_END,
+        PPY_SCR, KC_BTN3, KC_BTN2, KC_BTN1, PPY_DPI, _______, KC_VOLD, KC_MUTE, KC_VOLU, _______,
                           _______, _______, QK_BOOT, _______, _______, _______
     ),
 
@@ -167,7 +161,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [FUNC] = LAYOUT_split_3x5_3(
         KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR, _______, _______, _______, _______, _______,
         KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SCRL, _______, KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-        KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS, _______, KC_MUTE, KC_VOLD, KC_VOLU, _______,
+        KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS, _______, _______, _______, _______, _______,
                           _______, _______, _______, _______, _______, _______
     ),
     // clang-format on

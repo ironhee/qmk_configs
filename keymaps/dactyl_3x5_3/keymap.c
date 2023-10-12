@@ -28,26 +28,26 @@ enum keycodes
 /**
  * Alias
  */
-#define LTHUM_1 CTL_T(KC_ENT)      // Left Thumb 1
-#define LTHUM_2 LT(NAVI, KC_SPC)   // Left Thumb 2
-#define LTHUM_3 KC_TAB             // Left Thumb 3
-#define RTHUM_3 LT(FUNC, KC_LN G1) // Right Thumb 3
-#define RTHUM_2 LSFT_T(KC_BSPC)    // Right Thumb 2
-#define RTHUM_1 LT(NUMB, KC_DEL)   // Right Thumb 1
-#define LHOME_1 LGUI_T(KC_A)       // Left Home Row 1
-#define LHOME_2 LALT_T(KC_S)       // Left Home Row 2
-#define LHOME_3 LCTL_T(KC_D)       // Left Home Row 3
-#define LHOME_4 LSFT_T(KC_F)       // Left Home Row 4
-#define RHOME_4 LSFT_T(KC_J)       // Right Home Row 4
-#define RHOME_3 LCTL_T(KC_K)       // Right Home Row 3
-#define RHOME_2 LALT_T(KC_L)       // Right Home Row 2
-#define RHOME_1 LGUI_T(KC_QUOT)    // Right Home Row 1
-#define WN_PREV C(G(KC_LEFT))      // Window Space Prev
-#define WN_NEXT C(G(KC_RGHT))      // Window Space Next
-#define WN_SHOW G(KC_TAB)          // Window Space Next
-#define WD_PREV C(KC_LEFT)         // Word Prev
-#define WD_NEXT C(KC_RGHT)         // Word Next
-#define TB_NEXT A(KC_TAB)          // Next Tab
+#define LTHUM_1 CTL_T(KC_ENT)     // Left Thumb 1
+#define LTHUM_2 LT(NAVI, KC_SPC)  // Left Thumb 2
+#define LTHUM_3 KC_TAB            // Left Thumb 3
+#define RTHUM_3 LT(FUNC, KC_LNG1) // Right Thumb 3
+#define RTHUM_2 LSFT_T(KC_BSPC)   // Right Thumb 2
+#define RTHUM_1 LT(NUMB, KC_DEL)  // Right Thumb 1
+#define LHOME_1 LGUI_T(KC_A)      // Left Home Row 1
+#define LHOME_2 LALT_T(KC_S)      // Left Home Row 2
+#define LHOME_3 LCTL_T(KC_D)      // Left Home Row 3
+#define LHOME_4 LSFT_T(KC_F)      // Left Home Row 4
+#define RHOME_4 LSFT_T(KC_J)      // Right Home Row 4
+#define RHOME_3 LCTL_T(KC_K)      // Right Home Row 3
+#define RHOME_2 LALT_T(KC_L)      // Right Home Row 2
+#define RHOME_1 LGUI_T(KC_QUOT)   // Right Home Row 1
+#define WN_PREV C(G(KC_LEFT))     // Window Space Prev
+#define WN_NEXT C(G(KC_RGHT))     // Window Space Next
+#define WN_SHOW G(KC_TAB)         // Window Space Next
+#define WD_PREV C(KC_LEFT)        // Word Prev
+#define WD_NEXT C(KC_RGHT)        // Word Next
+#define TB_NEXT A(KC_TAB)         // Next Tab
 
 /**
  * Key Overrides

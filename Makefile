@@ -10,11 +10,6 @@ all: $(KEYBOARDS)
 
 .PHONY: $(KEYBOARDS)
 $(KEYBOARDS):
-	# init submodule
-	git submodule update --init --recursive
-	git submodule update --remote
-	# git submodule foreach make git-submodule
-
 	# cleanup old symlinks and directory
 	rm -rf qmk_firmware/keyboards/$(USER)
 	rm -rf qmk_firmware/keyboards/$(NAME_$@)/keymaps/$(USER)
@@ -47,4 +42,9 @@ clean:
 	rm -rf qmk_firmware/keyboards/$(NAME_ploopy_nano)/keymaps/$(USER)
 	rm -rf qmk_firmware/users/$(USER)
 	rm -rf ./build/
-	rm -rf ./qmk_firmware/
+
+init:
+	# init submodule
+	git submodule update --init --recursive
+	git submodule update --remote
+	# git submodule foreach make git-submodule

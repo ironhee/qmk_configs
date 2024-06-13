@@ -22,7 +22,6 @@ enum keycodes
     PPY_SCR, // Ploopy nano scroll wheel
     PPY_DPI, // Ploopy nano change DPI
     PPY_RST, // Ploopy nano RESET
-    SL_LINE, // Select Line
 };
 
 /**
@@ -105,7 +104,6 @@ const uint16_t PROGMEM rprn_rabk_combo[] = {KC_I, KC_O, COMBO_END};      // i + 
 const uint16_t PROGMEM pipe_ampr_combo[] = {KC_U, KC_O, COMBO_END};      // u + o = |&
 const uint16_t PROGMEM lang_combo[] = {RHOME_4, RHOME_3, COMBO_END};     // j + k = 한/영
 const uint16_t PROGMEM caps_combo[] = {RHOME_3, RHOME_2, COMBO_END};     // k + l = CAPSLOCK
-const uint16_t PROGMEM ppydpi_combo[] = {RHOME_4, RHOME_2, COMBO_END};   // j + l = Ploopy DPI
 const uint16_t PROGMEM lbrc_lcbr_combo[] = {KC_M, KC_COMM, COMBO_END};   // m + , = [{
 const uint16_t PROGMEM rbrc_rcbr_combo[] = {KC_COMM, KC_DOT, COMBO_END}; // , + . = ]}
 const uint16_t PROGMEM tild_dlr_combo[] = {KC_M, KC_DOT, COMBO_END};     // m + . = ~$
@@ -125,7 +123,6 @@ combo_t key_combos[] = {
     COMBO(pipe_ampr_combo, KC_PIPE),
     COMBO(lang_combo, KC_LNG1),
     COMBO(caps_combo, KC_CAPS),
-    COMBO(ppydpi_combo, PPY_DPI),
     COMBO(lbrc_lcbr_combo, KC_LBRC),
     COMBO(rbrc_rcbr_combo, KC_RBRC),
     COMBO(tild_dlr_combo, KC_TILD),
@@ -246,12 +243,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
         if (record->event.pressed)
         {
             SEND_STRING(SS_TAP(X_NUM) SS_TAP(X_NUM) SS_TAP(X_SCRL) SS_TAP(X_SCRL));
-        }
-        break;
-    case SL_LINE:
-        if (record->event.pressed)
-        {
-            SEND_STRING(SS_TAP(X_HOME) SS_DOWN(X_LSFT) SS_TAP(X_END) SS_UP(X_LSFT));
         }
         break;
     }

@@ -24,6 +24,6 @@ combo_t key_combos[COMBO_COUNT] = {
  * Keymaps
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [DEFT] = LAYOUT(KC_BTN1, KC_BTN3, KC_BTN2, KC_BTN3, MO(FUNC)),
+    [DEFT] = LAYOUT(KC_BTN1, DRAG_SCROLL, KC_BTN2, KC_BTN3, MO(FUNC)),
     [FUNC] = LAYOUT(KC_BTN4, QK_BOOT, KC_BTN5, DPI_CONFIG, _______),
 };
